@@ -1,0 +1,86 @@
+Playwright Automation Project - A real-time test application
+npm init playwright@latest : Installed Playwright Test Runner for smoote running of tests
+
+
+Browser(Chrome, Firefox) -> Browser Engine(Core Part of browser) will have 2 subset 
+Browser Engine : 
+	1. Rendering Engine - Takes care of Rendering of HTML Page and elements
+	2. JavaScript Engine - Responsible of running and executing all JS
+
+POM(Page Objects Model) - using Page Objects Chaining
+Landing on the home page and verifying it
+
+Object Chaining - we can create objects of another class in another class
+
+By Default Playwright runs test in headless mode, so we have to explicitly mention headed
+
+Running Commands through cmd prompt - npx playwright test loginTest.spec.ts --headed
+
+Showing reports Commands through cmd prompt - npx playwright show-report
+
+Use of Playwright : 
+    1. UI Test Automation + API Test Automation
+    2. UI Testing with API Testing 
+    3. API Testing
+
+Handling Multiple Environements 
+    Multi Environment Management - dotenv file configurations
+    We should not write separate duplicate test cases for each Environment, our same test cases should handle multiple test Environements(staging, UAT, dev, QA)
+    Command to install - npm install dotenv --save
+
+Set node_end = set NODE_ENV=qa
+
+Playwright 
+----------
+Applications Supported - Web Browser apps, Mobile web apps, API
+Languages Supported - JS, TS, Java, Python, C# & .Net
+Browsers Supported - Chromium, WebKit(Safari), and Firefox - (Headed, Headless) 
+OS Supported - Windows, MacOS, Linus, Support CLI runs
+
+
+Features Playwright
+--------------------
+
+Free/Open Sources
+Multi - Browser, Multi - Language
+Easy Setup and configurations
+Functional, API, Accessiblity Testing
+Built-In reports
+CI/CD, Docker
+Parallel Testing
+Auto Wait
+Built-In Assertions - Less Flaky Tests
+Multi Tab and Multi Window Support
+Frames, Shadow-DOM Elements Support 
+Test parameterization
+Emulate Mobile Devices
+Execution is Very Faster compare to Selenium/Cypress
+
+How to create and Run Playwright Tests
+-----------------------------------
+1. Without Codegen
+
+
+Async - Await in Tests -> JS is asynchronious Programming Language, to make synchronise we need Async/Await.
+    async will make sure function return a promise
+    await will wait till the object returns promise
+
+By Default Test will be run on 3 Browsers parallely in a headless manner
+But if you want to execute the test only on the 1 browser(Chromium)-> 
+    Command - npx playwright test HomePage.spec.js --project=chromium --headed
+With Debug mode - npx playwright test HomePage.spec.js --project=chromium --headed --debug
+
+
+
+
+
+POM(Page Objects Model) - It is model / Pattern which is used to store/ maintain the page elements in separate files. For Every It has separate file containing only page elements.
+    1. We need to create Page object class containing elements of that page.
+    2.Export keyword is needed so as the class can be used to another files 
+
+    *** ALerts Handling - In Playwright, handling browser alerts such as alert, confirm, or prompt is done using the page.on('dialog') ***
+
+
+
+Challenges - 
+    1. For making fullscreen during test Execution - to resolve made changes in playwright.config.js file
