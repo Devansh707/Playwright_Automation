@@ -56,6 +56,14 @@ Test parameterization
 Emulate Mobile Devices
 Execution is Very Faster compare to Selenium/Cypress
 
+Example - suppose locator.hover() we use and this method will automatically ensure the 
+    it will auto-wait for it, we don't have to explicitly add wait for it.
+    element is Enabled
+    locator resolves to exactly one element
+    element is Visible
+    element is Stable, as in not animating or completed animation
+    element Receives Events, as in not obscured by other elements
+
 How to create and Run Playwright Tests
 -----------------------------------
 1. Without Codegen
@@ -84,3 +92,10 @@ POM(Page Objects Model) - It is model / Pattern which is used to store/ maintain
 
 Challenges - 
     1. For making fullscreen during test Execution - to resolve made changes in playwright.config.js file
+    2. For running single test case using 'Tag' use command : 
+        npx playwright test  myntra.spec.js --grep "@t5" --project=chromium --headed
+    3. Fetching the elements from hover type drop-down menu.
+        When to use text locators
+        We recommend using text locators to find non interactive elements like div, span, p, etc. For interactive elements like button, a, input, etc. use role locators.
+        
+    4. Fetching the Product Prices after sorting 
