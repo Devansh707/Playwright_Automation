@@ -46,7 +46,25 @@ test.describe("Myntra Test Suite", () => {
       await myntraPage.gotoMyntra();
       await myntraPage.searchProduct("Nike Shoes");
       await myntraPage.sortByAscendingOrder();
-      await myntraPage.collectProductPrice();
+      let productPrices = await myntraPage.collectProductPrice();
+      let verification = await utils.verifyAscendingOrder(productPrices);
+      expect(verification).toBe(true);
+    }
+  );
+
+  test(
+    "TC-006 - Verify User is able to sort on Descending Order",
+    {
+      tag: "@t6",
+    },
+    async ({ page }) => {
+      const myntraPage = new myntraHomePage(page);
+      await myntraPage.gotoMyntra();
+      await myntraPage.searchProduct("Nike Shoes");
+      await myntraPage.sortByDescendingOrder();
+      let productPrices = await myntraPage.collectProductPrice();
+      let verification = await utils.verifyAscendingOrder(productPrices);
+      expect(verification).toBe(true);
     }
   );
 });

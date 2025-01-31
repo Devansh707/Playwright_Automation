@@ -49,4 +49,14 @@ module.exports = {
     );
     return result;
   },
+
+  async verifyAscendingOrder(items) {
+    let sortedItems = items.slice().sort((a, b) => a - b);
+    return JSON.stringify(items) === JSON.stringify(sortedItems);
+  },
+
+  async verifyDescendingOrder(items) {
+    let sortedItems = items.slice().sort((a, b) => b - a);
+    return JSON.stringify(items) === JSON.stringify(sortedItems);
+  },
 };

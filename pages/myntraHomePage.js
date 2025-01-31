@@ -7,9 +7,10 @@ exports.myntraHomePage = class myntraHomePage {
     // this.ascedingSort = '//input[@type="radio" and @value="price_asc"]';
     // this.ascedingSort = this.page.getByText("Price: Low to High").first();
     this.ascedingSort = '//label[text()="Price: Low to High"]';
+    this.descedingSort = '//label[text()="Price: High to Low"]';
 
     // this.productPrices = '//span[contains(@class, "product-discountedPrice")]';
-    this.productPrices = "span.product-discountedPrice";
+    this.productPrices = '//span[@class="product-discountedPrice"]/text()';
   }
 
   async gotoMyntra() {
@@ -25,10 +26,10 @@ exports.myntraHomePage = class myntraHomePage {
 
   async searchProduct(prod) {
     await this.page.fill(this.searchInput, prod);
-    await this.page.waitForTimeout(3000);
+    // await this.page.waitForTimeout(1000);
     await this.page.locator(this.searchInput).press("Enter");
     // await this.page.searchInput.press("Enter");
-    await this.page.waitForTimeout(3000);
+    // await this.page.waitForTimeout(3000);
   }
 
   async verifyProducts(prod) {
@@ -39,22 +40,32 @@ exports.myntraHomePage = class myntraHomePage {
 
   async sortByAscendingOrder() {
     await this.page.hover(this.sortBy);
-    await this.page.waitForTimeout(3000);
+    // await this.page.waitForTimeout(3000);
     // await this.page.ascedingSort.click();
     await this.page.locator(this.ascedingSort).click();
-    await this.page.waitForTimeout(3000);
+    // await this.page.waitForTimeout(3000);
+  }
+
+  async sortByDescendingOrder() {
+    await this.page.hover(this.sortBy);
+    await this.page.locator(this.descedingSort).click();
   }
 
   async collectProductPrice() {
-    let Prices = await this.page.locator(this.productPrices).allTextContents();
+    // await this.page.waitForSelector(this.productPrices, { state: "visible" });
+    let Prices = await this.page
+      .locator('//span[contains(@class, "product-discountedPrice")]')
+      .all();
     console.log("Prices = ", Prices);
 
     let productPrices = [];
-    for (let price of Prices) {
-      productPrices.push(pricesText.replace(/Rs\s?|,/g, ""));
+    for (let priceElement of Prices) {
+      let priceText = await priceElement.textContent();
+      productPrices.push(priceText.replace(/Rs\s?|,/g, "").trim());
     }
 
     console.log("ProductPrices:", productPrices);
-    await this.page.waitForTimeout(3000);
+    return productPrices;
+    // await this.page.waitForTimeout(3000);
   }
 };
